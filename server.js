@@ -24,15 +24,17 @@ const connectDB = async () => {
 };
 
 connectDB();
-  
-app.use(cors())
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
-app.use(bodyParser.json())
+
+// CORS configuration
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: false,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
 
 app.get('/',(req,res)=>{
   res.send('Welcome to Video Management API')
