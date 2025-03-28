@@ -12,10 +12,14 @@ const DATABASE_URL = process.env.MONGODB_DATABASE_URL;
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(DATABASE_URL);
-    console.log("Successfully connected to the database!");
+    await mongoose.connect(process.env.MONGODB_DATABASE_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB connected successfully');
   } catch (error) {
-    console.error("Error connecting to the database:", error);
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
   }
 };
 
